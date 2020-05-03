@@ -1,9 +1,9 @@
 import requests
 
 CONSUMER_KEY = ""
-CONSUMER_SECRET = "" 
+CONSUMER_SECRET = ""
 
-def getBearerToken():
+def get_bearer_token():
     response = requests.post(
       'https://api.twitter.com/oauth2/token', 
       auth=(CONSUMER_KEY, CONSUMER_SECRET),
