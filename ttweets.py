@@ -7,15 +7,19 @@ def getTweets(query):
     response = requests.get(
       'https://api.twitter.com/1.1/search/tweets.json?',
       headers={"Authorization": "Bearer " + token},
-      params={"q": query})
+      params={"q": query,
+            "tweet_mode": "extended"})
 
-    if response.status_code is not 200:
+    if response.status_code != 200:
       raise Exception("Cannot get a tweets (Status Code %d) Message: %s" % (response.status_code, response.text))
 
     body = response.json()
+
+    file1 = open("MyFile.json","a") 
+    file1.write(response.text)
     
     for tweet in body['statuses']:
-        text = tweet['text']
+        text = tweet['full_text']
         
         sentiment = "good|bad|neutral" #analyse text
 
@@ -29,7 +33,7 @@ def getTweets(query):
             "createdAt": tweet['created_at']
         }
 
-        print(finalEntity)
+        #print(text)
         #insert entity on DB
 
 getTweets('starwars')

@@ -1,7 +1,7 @@
 import requests
 
-CONSUMER_KEY = ""
-CONSUMER_SECRET = "" 
+CONSUMER_KEY = "mCnA96cficCAlg6QiW9QVWYVL"
+CONSUMER_SECRET = "1tXe5YXalOSKEEAyD11MCmdK7Brw93HKUaXYf2Ac91syNC1YA6" 
 
 def getBearerToken():
     response = requests.post(
