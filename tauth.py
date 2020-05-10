@@ -1,9 +1,8 @@
 import requests
+import keys
 
-
-CONSUMER_KEY = ""
-CONSUMER_SECRET = ""
-
+CONSUMER_KEY = keys.CONSUMER_KEY
+CONSUMER_SECRET = keys.CONSUMER_SECRET
 
 def get_bearer_token():
     response = requests.post(

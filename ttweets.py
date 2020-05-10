@@ -20,9 +20,8 @@ def get_tweets(query):
     file1.write(response.text)
     
     for tweet in body['statuses']:
-        text = tweet['text']
+        text = tweet['full_text']
         language = tweet['metadata']['iso_language_code']
-
 
         sentiment = TSentiment(text,language)
 
@@ -33,15 +32,13 @@ def get_tweets(query):
             "sentiment": sentiment.analyze_feeling(),
             "favoriteCount": tweet['favorite_count'],
             "retweetCount": tweet['retweet_count'],
-            "createdAt": tweet['created_at']
+            "createdAt": tweet['created_at'],
+            "countAnalysis": 1
         }
-
-
+        
         print(final_entity)
         # insert entity on DB
 
 
 
 get_tweets('Bolsonaro')
-
-
