@@ -8,12 +8,15 @@ from PIL import Image
 from nltk import tokenize
 from nltk import FreqDist
 from nltk import corpus
+from string import punctuation
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
+import unidecode
 import os
 import nltk
+
 
 resenha = pd.read_csv('imdb-reviews-pt-br.csv')
 pd.set_option('expand_frame_repr', False)
@@ -27,21 +30,80 @@ swap: {
 classificacao = resenha['sentiment'].replace(['neg', 'pos'], [0, 1])
 resenha['classificacao'] = classificacao
 
-palavras_irrelevantes = nltk.corpus.stopwords.words('portuguese')
-token_espaco = tokenize.WhitespaceTokenizer()
+# Essa é a tratativa de stopwords ---------------------------------------------------
+token_espaco = tokenize.WhitespaceTokenizer() # cria um separador de palavras por espaço
 
-palavras_irrelevantes = nltk.corpus.stopwords.words("portuguese")
-
+palavras_irrelevantes = nltk.corpus.stopwords.words("portuguese") # traz as stopwords do dicionário português
 frase_processada = list()
 for opiniao in resenha.text_pt:
     nova_frase = list()
-    palavras_texto = token_espaco.tokenize(opiniao)
-    for palavra in palavras_texto:
+    opiniao = opiniao.lower() # !IMPORTANTE dar lower na string para não falhar nas stopwords
+    palavras_texto = token_espaco.tokenize(opiniao) # quebro a opinião (que é uma única string) pelo espaço e insiro em uma lista
+    for palavra in palavras_texto: # itero sobre a lista para verificar se o valor do index está na lista de stopwords
         if palavra not in palavras_irrelevantes:
+            nova_frase.append(palavra)
+    frase_processada.append(' '.join(nova_frase)) # se a palavra não for um stopword, adiciono.
+
+resenha["tratamento_1"] = frase_processada
+#--------------------------------------------------------------------
+
+
+# Essa é a tratativa de pontuação ---------------------------------------------------
+pontuacao = list()
+for ponto in punctuation: # esse punctuation de string traz todos as pontuações do teclado
+    pontuacao.append(ponto)
+
+token_pontuacao = tokenize.WordPunctTokenizer() # cria um separador de palavras por pontuaão
+pontuacao_stopwords = pontuacao + palavras_irrelevantes
+
+frase_processada = list()
+for opiniao in resenha["tratamento_1"]:
+    nova_frase = list()
+    palavras_texto = token_pontuacao.tokenize(opiniao)
+    for palavra in palavras_texto:
+        if palavra not in pontuacao_stopwords:
             nova_frase.append(palavra)
     frase_processada.append(' '.join(nova_frase))
 
-resenha["tratamento_1"] = frase_processada
+resenha["tratamento_2"] = frase_processada
+
+#--------------------------------------------------------------
+
+# --------------- essa é a tratativa de acentuação ------------
+sem_acentos = [unidecode.unidecode(texto) for texto in resenha['tratamento_2']] # List Comprehension
+resenha['tratamento_3'] = sem_acentos
+
+#vou repetir o tratamento para retirar as stopwords que não foram removidas com acento
+frase_processada = list()
+for opiniao in resenha["tratamento_3"]:
+    nova_frase = list()
+    palavras_texto = token_pontuacao.tokenize(opiniao)
+    for palavra in palavras_texto:
+        if palavra not in pontuacao_stopwords:
+            nova_frase.append(palavra)
+    frase_processada.append(' '.join(nova_frase))
+
+resenha["tratamento_3"] = frase_processada
+
+#--------------------------------------------------------------
+
+#---------------------------- tratativa estemização -----------
+#para evitar flexões e derivações das palavras, transformando todas num mesmo radical
+# http://www.inf.ufrgs.br/~viviane/rslp/index.htm
+stemmer = nltk.RSLPStemmer()
+frase_processada = list()
+for opiniao in resenha["tratamento_3"]:
+    nova_frase = list()
+    palavras_texto = token_pontuacao.tokenize(opiniao)
+    for palavra in palavras_texto:
+        if palavra not in pontuacao_stopwords:
+            nova_frase.append(stemmer.stem(palavra))
+    frase_processada.append(' '.join(nova_frase))
+
+resenha["tratamento_4"] = frase_processada
+
+#---------------------------------------------------------
+
 
 def classificar_texto(texto, coluna_texto, coluna_classificacao):
     # quebrar em uma sacola de palavras (vetorização)
@@ -139,8 +201,8 @@ def gerar_histograma(texto, coluna_texto,
     ax.set(ylabel='Contagem')
     plt.show()
 
-#print(classificar_texto(resenha,'tratamento_1','classificacao'))
-#gerar_histograma(resenha,'tratamento_1',20)
-nuvem_palavras_pos(resenha,'tratamento_1')
+print(classificar_texto(resenha,'tratamento_4','classificacao'))
+#gerar_histograma(resenha,'tratamento_3',10)
+#nuvem_palavras_pos(resenha,'tratamento_3')
 
 
