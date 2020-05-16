@@ -1,7 +1,7 @@
 from matplotlib.pyplot import ylabel
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from wordcloud import WordCloud
 from os import path
 from PIL import Image
@@ -107,7 +107,7 @@ resenha["tratamento_4"] = frase_processada
 
 def classificar_texto(texto, coluna_texto, coluna_classificacao):
     # quebrar em uma sacola de palavras (vetorização)
-    vetorizar = CountVectorizer(max_features=50)
+    vetorizar = TfidfVectorizer(lowercase=False)
     bag_of_words = vetorizar.fit_transform(texto[coluna_texto])
 
     # quebrando cvs em treino e teste
@@ -117,6 +117,13 @@ def classificar_texto(texto, coluna_texto, coluna_classificacao):
     # aplicando treino da IA
     regressao_logistica = LogisticRegression()
     regressao_logistica.fit(treino, classe_treino)
+
+    pesos = pd.DataFrame(
+        regressao_logistica.coef_[0].T,
+        index = vetorizar.get_feature_names()
+    )
+    print(pesos.nlargest(10, 0))
+    print(pesos.nsmallest(10, 0))
 
     # retorna a acurácia do IA
     return round(regressao_logistica.score(teste, classe_teste) * 100, 2)
@@ -201,8 +208,9 @@ def gerar_histograma(texto, coluna_texto,
     ax.set(ylabel='Contagem')
     plt.show()
 
-print(classificar_texto(resenha,'tratamento_4','classificacao'))
-#gerar_histograma(resenha,'tratamento_3',10)
-#nuvem_palavras_pos(resenha,'tratamento_3')
 
 
+#print(classificar_texto(resenha,'tratamento_4','classificacao'))
+gerar_histograma(resenha,'tratamento_3', 10)
+gerar_grafico_linha(resenha,'tratamento_4', 10)
+nuvem_palavras_pos(resenha,'tratamento_4')
