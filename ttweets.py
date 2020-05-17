@@ -26,19 +26,21 @@ def get_tweets(query):
         sentiment = TSentiment(text,language)
 
         final_entity = {
-            "id": tweet['id'],
-            "user": tweet['user']['name'],
+            #"id": tweet['id'],
+            #"user": tweet['user']['name'],
             "text": text,
             "sentiment": sentiment.analyze_feeling(),
-            "favoriteCount": tweet['favorite_count'],
-            "retweetCount": tweet['retweet_count'],
-            "createdAt": tweet['created_at'],
-            "countAnalysis": 1
+            #"favoriteCount": tweet['favorite_count'],
+            #"retweetCount": tweet['retweet_count'],
+            #"createdAt": tweet['created_at'],
+            #"countAnalysis": 1
         }
         
+        #print(sentiment.analyze_feeling())
+
         print(final_entity)
         # insert entity on DB
 
 
 
-get_tweets('Fatec')
+get_tweets('@paulo_henves')

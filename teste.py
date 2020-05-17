@@ -18,7 +18,6 @@ import os
 import nltk
 import pickle
 
-
 resenha = pd.read_csv('imdb-reviews-pt-br.csv')
 pd.set_option('expand_frame_repr', False)
 pd.set_option('display.max_columns', 999)
@@ -129,6 +128,22 @@ def classificar_texto(texto, coluna_texto, coluna_classificacao):
     #salva aprendizado
     filename = 'anton_brain.sav'
     pickle.dump(regressao_logistica , open(filename, 'wb'))
+
+    #salva o vectorizer
+    filename = 'anton_vectorizer.sav'
+    pickle.dump(vetorizar, open(filename, 'wb'))
+
+    brain = tbrain.load_brain()
+
+    print(vetorizar)
+
+    #regressao_logistica.sparsify
+
+    print('Acurácia A:')
+    print(round(regressao_logistica.score(teste, classe_teste) * 100, 2))
+
+    print('Acurácia B:')
+    print(round(brain.score(teste, classe_teste) * 100, 2))
 
     # retorna a acurácia do IA
     return round(regressao_logistica.score(teste, classe_teste) * 100, 2)

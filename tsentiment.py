@@ -7,8 +7,6 @@ class TSentiment:
         self._text = text
         self._language = language
 
-
-
     @property
     def text(self):
         return self._text
@@ -19,12 +17,18 @@ class TSentiment:
 
     def analyze_feeling(self):
 
-        if self.language == 'pt':
-           return tbrain.predict(self._text)
+        prediction = tbrain.predict(self._text)
 
-        #elif self.language == 'en':
-            # analyse text in EN
-         #   print()
-
-        #return "good|bad|neutral"  # analyse text
+        count_zero = 0
+    
+        for entry in prediction:
+            if entry == 0:
+                count_zero += 1
+        
+        if count_zero > len(prediction) / 2:
+            return 'neg'
+        elif count_zero < len(prediction) / 2:
+            return 'pos'
+        else:
+            return 'neu'
 
