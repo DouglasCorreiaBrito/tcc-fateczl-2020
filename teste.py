@@ -16,6 +16,7 @@ import seaborn as sns
 import unidecode
 import os
 import nltk
+import pickle
 
 
 resenha = pd.read_csv('imdb-reviews-pt-br.csv')
@@ -125,6 +126,10 @@ def classificar_texto(texto, coluna_texto, coluna_classificacao):
     print(pesos.nlargest(10, 0))
     print(pesos.nsmallest(10, 0))
 
+    #salva aprendizado
+    filename = 'anton_brain.sav'
+    pickle.dump(regressao_logistica , open(filename, 'wb'))
+
     # retorna a acurácia do IA
     return round(regressao_logistica.score(teste, classe_teste) * 100, 2)
 
@@ -210,7 +215,7 @@ def gerar_histograma(texto, coluna_texto,
 
 
 
-#print(classificar_texto(resenha,'tratamento_4','classificacao'))
-gerar_histograma(resenha,'tratamento_3', 10)
-gerar_grafico_linha(resenha,'tratamento_4', 10)
-nuvem_palavras_pos(resenha,'tratamento_4')
+print(classificar_texto(resenha,'tratamento_4','classificacao'))
+#gerar_histograma(resenha,'tratamento_3', 10)
+#gerar_grafico_linha(resenha,'tratamento_4', 10)
+#nuvem_palavras_pos(resenha,'tratamento_4')

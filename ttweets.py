@@ -36,9 +36,9 @@ def get_tweets(query):
             "countAnalysis": 1
         }
         
-        #print(final_entity)
+        print(final_entity)
         # insert entity on DB
 
 
 
-get_tweets('Star Wars')
+get_tweets('Fatec')
