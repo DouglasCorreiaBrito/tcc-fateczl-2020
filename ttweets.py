@@ -1,6 +1,6 @@
 import requests
 import tauth
-from tsentiment import TSentiment
+from sentiment import Sentiment
 
 def get_tweets(query):
     token = tauth.get_bearer_token()
@@ -23,7 +23,7 @@ def get_tweets(query):
         text = tweet['full_text']
         language = tweet['metadata']['iso_language_code']
 
-        sentiment = TSentiment(text,language)
+        sentiment = Sentiment(text,language)
 
         final_entity = {
             #"id": tweet['id'],
@@ -43,4 +43,4 @@ def get_tweets(query):
 
 
 
-get_tweets('@paulo_henves')
+get_tweets('Bolsonaro')

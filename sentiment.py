@@ -1,8 +1,7 @@
-import pickle
-from sklearn.linear_model import LogisticRegression
-import tbrain
 
-class TSentiment:
+import brain
+
+class Sentiment:
     def __init__(self, text,language):
         self._text = text
         self._language = language
@@ -17,7 +16,7 @@ class TSentiment:
 
     def analyze_feeling(self):
 
-        prediction = tbrain.predict(self._text)
+        prediction = brain.predict(self._text)
 
         count_zero = 0
     
