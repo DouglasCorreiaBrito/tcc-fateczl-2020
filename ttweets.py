@@ -1,6 +1,6 @@
 import requests
 import tauth
-from tsentiment import TSentiment
+from sentiment import Sentiment
 
 def get_tweets(query):
     token = tauth.get_bearer_token()
@@ -23,22 +23,24 @@ def get_tweets(query):
         text = tweet['full_text']
         language = tweet['metadata']['iso_language_code']
 
-        sentiment = TSentiment(text,language)
+        sentiment = Sentiment(text,language)
 
         final_entity = {
-            "id": tweet['id'],
-            "user": tweet['user']['name'],
+            #"id": tweet['id'],
+            #"user": tweet['user']['name'],
             "text": text,
             "sentiment": sentiment.analyze_feeling(),
-            "favoriteCount": tweet['favorite_count'],
-            "retweetCount": tweet['retweet_count'],
-            "createdAt": tweet['created_at'],
-            "countAnalysis": 1
+            #"favoriteCount": tweet['favorite_count'],
+            #"retweetCount": tweet['retweet_count'],
+            #"createdAt": tweet['created_at'],
+            #"countAnalysis": 1
         }
         
-        #print(final_entity)
+        #print(sentiment.analyze_feeling())
+
+        print(final_entity)
         # insert entity on DB
 
 
 
-get_tweets('Star Wars')
+get_tweets('Bolsonaro')
