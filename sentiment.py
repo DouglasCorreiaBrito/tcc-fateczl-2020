@@ -1,11 +1,8 @@
-<<<<<<< HEAD:tsentiment.py
 import pickle
 from sklearn.linear_model import LogisticRegression
-import tbrain
+import brain
 import polyglot
 from polyglot.text import Text
-=======
->>>>>>> fc3b97e2fc22f44d2053584bf8e3985bfdfbfe9c:sentiment.py
 
 import brain
 
@@ -24,12 +21,8 @@ class Sentiment:
 
     def analyze_feeling(self):
 
-<<<<<<< HEAD:tsentiment.py
         if ":(" in self._text:
             self._text = "ruim"
-=======
-        prediction = brain.predict(self._text)
->>>>>>> fc3b97e2fc22f44d2053584bf8e3985bfdfbfe9c:sentiment.py
 
         text = Text(self._text, hint_language_code="pt")
 
@@ -43,7 +36,7 @@ class Sentiment:
                 predictionText += word + ' '
 
         if predictionText:
-            prediction = tbrain.predict(predictionText)
+            prediction = brain.predict(predictionText)
         else:
             prediction = [0]
 
