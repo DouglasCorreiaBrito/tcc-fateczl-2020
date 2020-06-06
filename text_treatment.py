@@ -32,14 +32,11 @@ def treat_stemming(text):
     stemmer = RSLPStemmer()
     newText = list()
     for word in text.split(' '):
-        newText.append(stemmer.stem(word))
+        if word:
+            newText.append(stemmer.stem(word))
     return ' '.join(newText)
 
-### TODO Classificação de adjevitos. Tratar posteriormente.
-#def pos_tagging(text):
-#
-#    corpus.mac_morpho.tagged_words()
-
-# TODO melhorar isso aqui
 def treat_all(text):
+    if not text:
+        return text
     return treat_stemming(treat_stopwords(treat_punctuation(treat_accentuation(pre_processing(text)))))

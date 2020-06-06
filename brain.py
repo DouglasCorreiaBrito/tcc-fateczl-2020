@@ -22,19 +22,6 @@ def predict(tweet):
     brain = load_brain()
     vetorizar = load_vectorizer()
     bag_of_words = vetorizar.transform(palavras_texto)
-    result = brain.predict(bag_of_words)
-    
-    print(brain.predict(bag_of_words))
-
-    print(brain.decision_function(bag_of_words))
-
-    #print(vetorizar.get_feature_names(bag_of_words))
-
-    #round(brain.score(teste, classe_teste) * 100, 2)
+    result = brain.decision_function(bag_of_words)
     
     return result
-
-#print(predict('pi ruim horri terri chat nad infeli decepca ridicul nenhum'))
-#print(predict('otim excel perfeit favorit incri hilari divert ador brilh'))
-
-#print(predict('testando'))
