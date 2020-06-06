@@ -133,17 +133,17 @@ def classificar_texto(texto, coluna_texto, coluna_classificacao):
     filename = 'anton_vectorizer.sav'
     pickle.dump(vetorizar, open(filename, 'wb'))
 
-    brain = tbrain.load_brain()
+    #brain = tbrain.load_brain()
 
-    print(vetorizar)
+    #print(vetorizar)
 
     #regressao_logistica.sparsify
 
     print('Acurácia A:')
     print(round(regressao_logistica.score(teste, classe_teste) * 100, 2))
 
-    print('Acurácia B:')
-    print(round(brain.score(teste, classe_teste) * 100, 2))
+    #print('Acurácia B:')
+    #print(round(brain.score(teste, classe_teste) * 100, 2))
 
     # retorna a acurácia do IA
     return round(regressao_logistica.score(teste, classe_teste) * 100, 2)

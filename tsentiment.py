@@ -1,6 +1,8 @@
 import pickle
 from sklearn.linear_model import LogisticRegression
 import tbrain
+import polyglot
+from polyglot.text import Text
 
 class TSentiment:
     def __init__(self, text,language):
@@ -17,18 +19,34 @@ class TSentiment:
 
     def analyze_feeling(self):
 
-        prediction = tbrain.predict(self._text)
+        if ":(" in self._text:
+            self._text = "ruim"
 
-        count_zero = 0
-    
-        for entry in prediction:
-            if entry == 0:
-                count_zero += 1
-        
-        if count_zero > len(prediction) / 2:
+        text = Text(self._text, hint_language_code="pt")
+
+        predictionText = ''
+
+        #Adjetivos, adverbios, substantivos, verbos
+        allowableTags = ['ADJ', 'ADV', 'NOUN','VERB']
+
+        for word, tag in text.pos_tags:
+            if any(allowedTag in tag for allowedTag in allowableTags):
+                predictionText += word + ' '
+
+        if predictionText:
+            prediction = tbrain.predict(predictionText)
+        else:
+            prediction = [0]
+
+        pontuacaoFinal = 0
+
+        for pontuacao in prediction:
+            pontuacaoFinal += pontuacao
+
+        print(pontuacaoFinal)
+        if pontuacaoFinal < -0.5:
             return 'neg'
-        elif count_zero < len(prediction) / 2:
+        elif pontuacaoFinal > 0.5:
             return 'pos'
         else:
             return 'neu'
-
