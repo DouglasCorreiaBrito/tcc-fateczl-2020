@@ -1,10 +1,6 @@
 import pickle
 from sklearn.linear_model import LogisticRegression
 import brain
-import polyglot
-from polyglot.text import Text
-
-import brain
 
 class Sentiment:
     def __init__(self, text,language):
@@ -20,26 +16,12 @@ class Sentiment:
         return self._language
 
     def analyze_feeling(self):
-
+        if self._language not in 'pt_BR':
+            return 'olan'
         if ":(" in self._text:
             self._text = "ruim"
 
-        text = Text(self._text, hint_language_code="pt")
-
-        predictionText = ''
-
-        #Adjetivos, adverbios, substantivos, verbos
-        allowableTags = ['ADJ', 'ADV', 'NOUN','VERB']
-
-        for word, tag in text.pos_tags:
-            if any(allowedTag in tag for allowedTag in allowableTags):
-                predictionText += word + ' '
-
-        if predictionText:
-            prediction = brain.predict(predictionText)
-        else:
-            prediction = [0]
-
+        prediction = brain.predict(self._text)
         pontuacaoFinal = 0
 
         for pontuacao in prediction:

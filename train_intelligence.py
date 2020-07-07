@@ -5,18 +5,12 @@ import pandas as pd
 import pickle
 import text_treatment
 
-
 mass_data_reviews = pd.read_csv('imdb-reviews-pt-br.csv')
-pd.set_option('expand_frame_repr', False)
-pd.set_option('display.max_columns', 999)
+#pd.set_option('expand_frame_repr', False)
+#pd.set_option('display.max_columns', 999)
 
-swap: {
-    'neg': 0,
-    'pos': 1
-}
 classification = mass_data_reviews['sentiment'].replace(['neg', 'pos'], [0, 1])
 mass_data_reviews['classification'] = classification
-
 
 processed_phrase = list()
 
@@ -24,10 +18,7 @@ for opinion in mass_data_reviews.text_pt:
     processed_phrase.append(text_treatment.treat_all(opinion))
 mass_data_reviews["treated_text"] = processed_phrase
 
-
-
 def train_intelligence(dataframe, text_column, classification_column):
-
     vectorizer = TfidfVectorizer(lowercase=False)
     bag_of_words = vectorizer.fit_transform(dataframe[text_column])
 
@@ -51,6 +42,4 @@ def train_intelligence(dataframe, text_column, classification_column):
 
     return round(logistic_regression.score(test, class_test) * 100, 2)
 
-
 print(train_intelligence(mass_data_reviews,'treated_text','classification'))
-

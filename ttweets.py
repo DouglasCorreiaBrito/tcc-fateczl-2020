@@ -16,9 +16,6 @@ def get_tweets(query):
 
     body = response.json()
 
-    file1 = open("MyFile.json","a") 
-    file1.write(response.text)
-
     for tweet in body['statuses']:
         text = tweet['full_text']
         language = tweet['metadata']['iso_language_code']
@@ -35,14 +32,11 @@ def get_tweets(query):
             "createdAt": tweet['created_at'],
             "countAnalysis": 1
         }
-        
-        #print(sentiment.analyze_feeling())
 
         print("Tweet: " + final_entity['text'])
         print("Sentiment: " + final_entity['sentiment'])
         print()
         
         # TODO: insert entity on DB
-
 
 get_tweets('chocolate')
