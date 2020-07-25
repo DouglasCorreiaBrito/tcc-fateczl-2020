@@ -1,9 +1,7 @@
-import pickle
-from sklearn.linear_model import LogisticRegression
 import brain
 
 class Sentiment:
-    def __init__(self, text,language):
+    def __init__(self, text, language):
         self._text = text
         self._language = language
 
@@ -27,7 +25,6 @@ class Sentiment:
         for pontuacao in prediction:
             pontuacaoFinal += pontuacao
 
-        print(pontuacaoFinal)
         if pontuacaoFinal < -0.5:
             return 'neg'
         elif pontuacaoFinal > 0.5:

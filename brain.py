@@ -1,10 +1,9 @@
-from sklearn.linear_model import LogisticRegression
-from sklearn.feature_extraction.text import TfidfVectorizer
-from nltk import tokenize
 import pickle
-import pandas as pd
+
+from nltk import tokenize
+
 import text_treatment
-from os import path
+
 
 def load_brain():
     filename = 'anton_brain.sav'
@@ -23,5 +22,4 @@ def predict(tweet):
     vetorizar = load_vectorizer()
     bag_of_words = vetorizar.transform(palavras_texto)
     result = brain.decision_function(bag_of_words)
-    
     return result

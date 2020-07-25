@@ -131,4 +131,15 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+<<<<<<< HEAD
+
+#data files
 imdb-reviews-pt-br.csv
+Book1.csv
+teste.txt
+anton_brain.sav
+anton_vectorizer.sav
+
+=======
+imdb-reviews-pt-br.csv
+>>>>>>> dev
