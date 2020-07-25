@@ -25,7 +25,7 @@ def draw_wordcloud(words_in_the_same_str, name_mask=''):
 
         word_cloud = WordCloud(width=800, height=500, max_font_size=110,
                                collocations=False, mask=image_mask,
-                               background_color='white', contour_width=2,
+                               background_color='black', contour_width=1,
                                contour_color='steelblue').generate(words)
         plt.figure(figsize=(10, 7))
         plt.imshow(word_cloud, interpolation='bilinear')
@@ -82,4 +82,4 @@ def gerar_histograma(dataframe, df_text_column, num_column):
 
 
 # draw_wordcloud(unica_string)
-gerar_histograma(data, 'text_pt', 10)
+#gerar_histograma(data, 'text_pt', 10)

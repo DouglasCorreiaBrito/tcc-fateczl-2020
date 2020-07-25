@@ -26,7 +26,6 @@ class Sentiment:
         for pontuacao in prediction:
             pontuacaoFinal += pontuacao
 
-        print(pontuacaoFinal)
         if pontuacaoFinal < -0.5:
             return 'neg'
         elif pontuacaoFinal > 0.5:
