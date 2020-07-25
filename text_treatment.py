@@ -1,4 +1,5 @@
 import unidecode
+import re
 from nltk import tokenize
 from nltk import corpus
 from nltk import RSLPStemmer
@@ -39,14 +40,21 @@ def treat_stemming(text):
             newText.append(stemmer.stem(word))
     return ' '.join(newText)
 
+def treat_user_mention(text):
+    regex = '@[\S]+'
+    return re.sub(regex, '', text)
+
+def treat_urls(text):
+    regex = '((www\.[\S]+)|(https?://[\S]+))'
+    return re.sub(regex, '', text)
 
 def treat_all(text):
     if not text:
         return text
-    return treat_stemming(treat_stopwords(treat_punctuation(treat_accentuation(pre_processing(text)))))
+    return treat_stemming(treat_stopwords(treat_punctuation(treat_accentuation(treat_user_mention(treat_urls(pre_processing(text)))))))
 
 
 def treat_for_wordcloud(text):
     if not text:
         return text
-    return treat_stopwords(treat_punctuation(treat_accentuation(pre_processing(text))))
+    return treat_stopwords(treat_punctuation(treat_accentuation(treat_user_mention(treat_urls(pre_processing(text))))))

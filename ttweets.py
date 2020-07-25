@@ -3,7 +3,6 @@ import tauth
 from termcolor import colored
 from sentiment import Sentiment
 
-
 def get_tweets(query):
     token = tauth.get_bearer_token()
 
@@ -11,14 +10,15 @@ def get_tweets(query):
         'https://api.twitter.com/1.1/search/tweets.json?',
         headers={"Authorization": "Bearer " + token},
         params={"q": query,
-                "tweet_mode": "extended"})
+                "tweet_mode": "extended",
+                "lang": "pt"})
 
     if response.status_code != 200:
         raise Exception("Cannot get a tweets (Status Code %d) Message: %s" % (response.status_code, response.text))
 
     body = response.json()
     if not body['statuses']:
-        print(colored('\nNão encontrei nehum tweet', 'red'))
+        print(colored('\nNão encontrei nehum tweet', 'redF'))
     else:
         for tweet in body['statuses']:
             text = tweet['full_text']
@@ -37,7 +37,7 @@ def get_tweets(query):
                 "countAnalysis": 1
             }
 
-            print(colored("Tweet: " + final_entity['text'], 'white'))
+            print(colored("Tweet: " + text, 'white'))
             print(
                   colored("Sentiment: " + final_entity['sentiment'], 'blue')
                   if final_entity['sentiment'] == 'pos'
