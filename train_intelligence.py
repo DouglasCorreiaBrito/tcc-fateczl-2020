@@ -18,7 +18,6 @@ for opinion in mass_data_reviews.text_pt:
     processed_phrase.append(text_treatment.treat_all(opinion))
 mass_data_reviews["treated_text"] = processed_phrase
 
-
 def train_intelligence(dataframe, text_column, classification_column):
     vectorizer = TfidfVectorizer(lowercase=False)
     bag_of_words = vectorizer.fit_transform(dataframe[text_column])

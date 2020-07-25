@@ -10,11 +10,11 @@ import seaborn as sns
 import os
 import text_treatment
 
-arquivo = open('teste.txt', 'r', encoding="utf8")
-unica_string = arquivo.read()
-arquivo.close()
+#arquivo = open('teste.txt', 'r', encoding="utf8")
+#unica_string = arquivo.read()
+#arquivo.close()
 
-data = pd.read_csv('Book1.csv')
+#data = pd.read_csv('Book1.csv')
 
 
 def draw_wordcloud(words_in_the_same_str, name_mask=''):

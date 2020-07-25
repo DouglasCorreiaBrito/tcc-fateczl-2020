@@ -4,7 +4,6 @@ from nltk import corpus
 from nltk import RSLPStemmer
 from string import punctuation
 
-
 # acentuação -> pontuação -> stopword -> stemização
 
 def pre_processing(text):
@@ -31,7 +30,6 @@ def treat_stopwords(text):
         if word not in stopwords:
             newText.append(word)
     return ' '.join(newText)
-
 
 def treat_stemming(text):
     stemmer = RSLPStemmer()

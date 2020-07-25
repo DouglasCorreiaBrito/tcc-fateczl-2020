@@ -1,6 +1,5 @@
 import brain
 
-
 class Sentiment:
     def __init__(self, text, language):
         self._text = text
