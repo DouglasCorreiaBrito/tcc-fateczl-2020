@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+      <link rel="script" href="{{ url_for('static', filename='app.js') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PLN</title>
+  </head>
+  <body>
+  <nav class="teal lighten-1">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">
+          <i class="material-icons" style="margin-left: 2em">home</i>
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Sobre este projeto</a></li>
+        <li><a href="badges.html">Sobre os desenvolvedores</a></li>
+      </ul>
+    </div>
+  </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h2>{{title}}</h2>
+            <blockquote>
+                {{description}}
+            </blockquote>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+  </body>
+</html>

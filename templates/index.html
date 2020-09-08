@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block content %}
+ <nav class="teal lighten-1">
+    <div class="nav-wrapper">
+      <form action="/results" method="post" onsubmit="preloader()">
+        <div class="input-field">
+          <input id="search" name="search" type="search" placeholder="digite..." required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+    </div>
+  </nav>
+<section id="preloader" style="margin-top: 4em; visibility: hidden;">
+    <h6 style="text-align: center" id="text-loader">Conectando ao Twitter </h6>
+    <div class="progress">
+      <div class="indeterminate"></div>
+    </div>
+</section>
+<script>
+function preloader() {
+  document.getElementById("preloader").style.visibility = "visible";
+}
+</script>
+
+{% endblock %}

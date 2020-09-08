@@ -1,9 +1,12 @@
 import requests
 import tauth
+from Result import Result
 from termcolor import colored
 from sentiment import Sentiment
 
+
 def get_tweets(query):
+    list_of_results = []
     token = tauth.get_bearer_token()
 
     response = requests.get(
@@ -18,7 +21,7 @@ def get_tweets(query):
 
     body = response.json()
     if not body['statuses']:
-        print(colored('\nNão encontrei nehum tweet', 'redF'))
+        print(colored('\nNão encontrei nenhum tweet', 'redF'))
     else:
         for tweet in body['statuses']:
             text = tweet['full_text']
@@ -26,21 +29,15 @@ def get_tweets(query):
 
             sentiment = Sentiment(text, language)
 
-            final_entity = {
-                "id": tweet['id'],
-                "user": tweet['user']['name'],
-                "text": text,
-                "sentiment": sentiment.analyze_feeling(),
-                "favoriteCount": tweet['favorite_count'],
-                "retweetCount": tweet['retweet_count'],
-                "createdAt": tweet['created_at'],
-                "countAnalysis": 1
-            }
+            result = Result(
+                tweet['id'],
+                tweet['user']['name'],
+                text,
+                sentiment.analyze_feeling(),
+                tweet['favorite_count'],
+                tweet['retweet_count'],
+                tweet['created_at'],
+            )
+            list_of_results.append(result)
 
-            print(colored("Tweet: " + text, 'white'))
-            print(
-                  colored("Sentiment: " + final_entity['sentiment'], 'blue')
-                  if final_entity['sentiment'] == 'pos'
-                  else
-                  colored("Sentiment: " + final_entity['sentiment'], 'red'))
-            print()
+    return list_of_results
