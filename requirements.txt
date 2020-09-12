@@ -6,7 +6,6 @@ matplotlib
 pandas
 numpy
 seaborn
-glob
 unidecode
 re
 sklearn
