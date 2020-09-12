@@ -40,4 +40,5 @@ def result():
                            url2='./static/images/pos_plot.png')
 
 
+port = int(os.environ.get('PORT', 33507))
 app.run(debug=True)
