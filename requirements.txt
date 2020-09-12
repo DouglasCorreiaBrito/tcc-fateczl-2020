@@ -10,3 +10,4 @@ unidecode
 regex
 sklearn
 Pillow
+gunicorn
