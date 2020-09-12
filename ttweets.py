@@ -1,35 +1,43 @@
 import requests
 import tauth
+from Result import Result
+from sentiment import Sentiment
 
-def getTweets(query):
-    token = tauth.getBearerToken()
+
+def get_tweets(query):
+    list_of_results = []
+    token = tauth.get_bearer_token()
 
     response = requests.get(
-      'https://api.twitter.com/1.1/search/tweets.json?',
-      headers={"Authorization": "Bearer " + token},
-      params={"q": query})
+        'https://api.twitter.com/1.1/search/tweets.json?',
+        headers={"Authorization": "Bearer " + token},
+        params={"q": query,
+                "tweet_mode": "extended",
+                "lang": "pt"})
 
-    if response.status_code is not 200:
-      raise Exception("Cannot get a tweets (Status Code %d) Message: %s" % (response.status_code, response.text))
+    if response.status_code != 200:
+        raise Exception("Cannot get a tweets (Status Code %d) Message: %s" % (response.status_code, response.text))
 
     body = response.json()
-    
-    for tweet in body['statuses']:
-        text = tweet['text']
-        
-        sentiment = "good|bad|neutral" #analyse text
+    if not body['statuses']:
+        #print(colored('\nNão encontrei nenhum tweet', 'redF'))
+        print()
+    else:
+        for tweet in body['statuses']:
+            text = tweet['full_text']
+            language = tweet['metadata']['iso_language_code']
 
-        finalEntity = {
-            "id": tweet['id'],
-            "user": tweet['user']['name'],
-            "text": text,
-            "sentiment": sentiment,
-            "favoriteCount": tweet['favorite_count'],
-            "retweetCount": tweet['retweet_count'],
-            "createdAt": tweet['created_at']
-        }
+            sentiment = Sentiment(text, language)
 
-        print(finalEntity)
-        #insert entity on DB
+            result = Result(
+                tweet['id'],
+                tweet['user']['name'],
+                text,
+                sentiment.analyze_feeling(),
+                tweet['favorite_count'],
+                tweet['retweet_count'],
+                tweet['created_at'],
+            )
+            list_of_results.append(result)
 
-getTweets('starwars')
+    return list_of_results
