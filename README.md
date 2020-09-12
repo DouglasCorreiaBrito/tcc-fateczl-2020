@@ -1,2 +1,2 @@
 # TCC ADS Fatec ZL
-TCC ADS Fatec ZL - 2020. Reclame Alí.
+### Aprendizado de Máquina para Análise de Sentimentos em Redes Sociais

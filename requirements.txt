@@ -1,0 +1,14 @@
+flask
+requests
+nltk
+pickle
+wordcloud
+PIL
+matplotlib
+pandas
+numpy
+seaborn
+glob
+unidecode
+re
+sklearn
