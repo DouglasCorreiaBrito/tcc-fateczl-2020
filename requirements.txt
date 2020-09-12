@@ -1,7 +1,6 @@
 flask
 requests
 nltk
-pickle
 wordcloud
 PIL
 matplotlib
