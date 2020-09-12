@@ -7,6 +7,6 @@ pandas
 numpy
 seaborn
 unidecode
-re
+regex
 sklearn
 Pillow
