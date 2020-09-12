@@ -1,0 +1,49 @@
+{% extends "template.html" %}
+{% block content %}
+<table class="table striped responsive-table table-bordered centered" id="table">
+     <thead class="thead-default">
+        <tr>
+            <th>Tweet</th>
+            <th>Sentimento</th>
+            <th>Favoritada(s)</th>
+            <th>Retuitada(s)</th>
+        </tr>
+     </thead>
+        <tbody>
+        {% for t in tweets %}
+        {%  if t.sentiment == 'neg' %}
+        <tr class="red lighten-2">
+        {% elif t.sentiment == 'pos' %}
+        <tr class="blue lighten-2">
+            {% else %}
+        <tr class="grey lighten-3">
+            {% endif %}
+            <td>{{t.text}}</td>
+            <td>{{t.sentiment}}</td>
+            <td>{{t.favorites}}</td>
+            <td>{{t.retweets}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+ </table>
+
+<h5>Nuvem de palavras negativas</h5>
+<blockquote>essas são as palavras negativas com que mais apareceram nos tweets</blockquote>
+<img class="materialboxed" width="850" src={{ url1 }} alt="Chart" id="img-negative">
+
+ </table>
+<h5>Nuvem de palavras positivas</h5>
+<blockquote> essas são as palavras positivas com que mais apareceram nos tweets</blockquote>
+<img class="materialboxed" width="850" src={{ url2 }} alt="Chart" id="img-positive">
+<script>
+    window.onload = function() {
+    var imageNeg = document.getElementById("img-negative");
+    var imagePos = document.getElementById("img-positive");
+    function updateImage() {
+        imageNeg.src = imageNeg.src.split("?")[0] + "?" + new Date().getTime();
+        imagePos.src = imagePos.src.split("?")[0] + "?" + new Date().getTime();
+    }
+    setInterval(updateImage, 1000);
+}
+</script>
+{% endblock %}

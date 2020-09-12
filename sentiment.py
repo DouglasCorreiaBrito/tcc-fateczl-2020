@@ -21,13 +21,19 @@ class Sentiment:
 
         prediction = brain.predict(self._text)
         pontuacaoFinal = 0
+        list_punct = []
 
         for pontuacao in prediction:
+            list_punct.append(pontuacao)
             pontuacaoFinal += pontuacao
-
+        print('score por palavra', list_punct)
+        print('score final da frase',pontuacaoFinal)
         if pontuacaoFinal < -0.5:
+            print(pontuacaoFinal)
             return 'neg'
         elif pontuacaoFinal > 0.5:
+            print(pontuacaoFinal)
             return 'pos'
         else:
+            print(pontuacaoFinal)
             return 'neu'

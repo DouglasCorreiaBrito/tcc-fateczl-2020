@@ -1,3 +1,6 @@
+import glob
+import random
+
 from wordcloud import WordCloud
 from os import path
 from PIL import Image
@@ -16,11 +19,14 @@ import text_treatment
 
 #data = pd.read_csv('Book1.csv')
 
+def bad_color_func(word, font_size, position, orientation, random_state=None,
+                    **kwargs):
+    return "hsl(0, 75%%, %d%%)" % random.randint(60, 100)
 
-def draw_wordcloud(words_in_the_same_str, name_mask=''):
+def draw_wordcloud(words_in_the_same_str, name_mask='', positive_flag=True):
     words = text_treatment.treat_for_wordcloud(words_in_the_same_str)
 
-    if name_mask:
+    if positive_flag:
         image_mask = _prepare_background_mask(name_mask)
 
         word_cloud = WordCloud(width=800, height=500, max_font_size=110,
@@ -28,16 +34,25 @@ def draw_wordcloud(words_in_the_same_str, name_mask=''):
                                background_color='black', contour_width=1,
                                contour_color='steelblue').generate(words)
         plt.figure(figsize=(10, 7))
-        plt.imshow(word_cloud, interpolation='bilinear')
+        plt.imshow(word_cloud,interpolation='bilinear')
+        plt.plot(range(10), range(10), '-o')
+        plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
         plt.axis('off')
-        plt.show()
+        plt.savefig('./static/images/pos_plot.png', bbox_inches=0)
+
     else:
+        image_mask = _prepare_background_mask(name_mask)
+
         word_cloud = WordCloud(width=800, height=500, max_font_size=110,
-                               collocations=False, contour_width=2).generate(words)
+                               collocations=False, mask=image_mask,
+                               background_color='black', contour_width=1,
+                               contour_color='steelblue').generate(words)
         plt.figure(figsize=(10, 7))
-        plt.imshow(word_cloud, interpolation='bilinear')
+        plt.imshow(word_cloud.recolor(color_func=bad_color_func, random_state=3), interpolation='bilinear')
+        plt.plot(range(10), range(10), '-o')
+        plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
         plt.axis('off')
-        plt.show()
+        plt.savefig('./static/images/neg_plot.png', bbox_inches=0)
 
 
 def _prepare_background_mask(name_mask):
@@ -60,7 +75,7 @@ def draw_line_graph(dataframe, df_text_column, num_column):
     ax = sns.lineplot(data=df_frequencia.nlargest(columns='frequency', n=num_column), x='word', y='frequency',
                       color='steelblue')
     ax.set(ylabel='Score')
-    plt.show()
+    plt.savefig('/static/images/new_plot.png')
 
 
 def gerar_histograma(dataframe, df_text_column, num_column):
@@ -78,8 +93,6 @@ def gerar_histograma(dataframe, df_text_column, num_column):
                      color='steelblue')
     ax.set(ylabel='Score')
     plt.show()
-
-
 
 # draw_wordcloud(unica_string)
 #gerar_histograma(data, 'text_pt', 10)
