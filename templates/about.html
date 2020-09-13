@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>About</h1>
-</body>
-</html>
+{% extends "template.html" %}
+{% block content %}
+<h3>Sobre este projeto</h3>
+<blockquote>Conheça as motivações e acompanhe o desenvolvimento deste trabalho</blockquote>
+ <ul class="collapsible">
+     <li>
+      <div class="collapsible-header"><i class="material-icons">priority_high</i>O que é este projeto</div>
+      <div class="collapsible-body">
+        <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_lKvkGl.json"  background="transparent"  speed="1"  style="width: 150px; height: 150px;"  loop  autoplay></lottie-player>
+          <p>Este projeto é uma implementação de prática de um trabalho de graduação de curso sobre anállise sentimental em redes sociais.
+          O sistema realiza a análise sentimental a partir de um data mining na rede social Twitter aplicando
+          conceitos de Machine Learning e Natural Language Processing.</p>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">child_friendly</i>O início</div>
+      <div class="collapsible-body">
+        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_v7QuNE.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+          <span>Lorem ipsum dolor sit amet.</span>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">school</i>Decisão do orientador</div>
+      <div class="collapsible-body">
+            <lottie-player src="https://assets8.lottiefiles.com/private_files/lf30_GTmtHy.json"  background="transparent"  speed="1"  style="width: 230px; height: 230px;"  loop  autoplay></lottie-player>
+          <span>Lorem ipsum dolor sit amet.</span>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">code</i>O desenvolvimento</div>
+      <div class="collapsible-body">
+          <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_dl87KC.json"  background="transparent"  speed="2"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+          <span>Lorem ipsum dolor sit amet.</span>
+      </div>
+    </li>
+     <li>
+      <div class="collapsible-header"><i class="material-icons">computer</i>Tecnologias usadas</div>
+      <div class="collapsible-body">
+          <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_SmywXC.json"  background="transparent"  speed="1"  style="width: 150px; height: 150px;"  loop  autoplay></lottie-player>
+          <span>Lorem ipsum dolor sit amet.</span>
+      </div>
+    </li>
+  </ul>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script>
+    var elem = document.querySelector('.collapsible.expandable');
+    var instance = M.Collapsible.init(elem, {
+    accordion: false
+    });
+</script>
+{% endblock %}

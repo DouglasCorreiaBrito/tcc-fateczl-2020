@@ -10,17 +10,26 @@
     <title>PLN</title>
   </head>
   <body>
-  <nav class="teal lighten-1">
+  <nav class="teal lighten-1 ">
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo">
+      <a href="/" class="brand-logo hide-on-med-and-down">
           <i class="material-icons" style="margin-left: 2em">home</i>
       </a>
+         <a href="#" class="sidenav-trigger" data-target="mobile-links">
+          <i class="material-icons">menu</i>
+        </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="sass.html">Sobre este projeto</a></li>
-        <li><a href="badges.html">Sobre os desenvolvedores</a></li>
+        <li><a href="/about">Sobre este projeto</a></li>
+        <li><a href="/devs">Sobre os desenvolvedores</a></li>
       </ul>
     </div>
   </nav>
+
+  <ul class="sidenav" id="mobile-links">
+      <li><a href="/">Home</a></li>
+        <li><a href="/about">Sobre este projeto</a></li>
+        <li><a href="/devs">Sobre os desenvolvedores</a></li>
+  </ul>
 
     <div class="container">
         <div class="page-header">
@@ -32,5 +41,14 @@
         {% block content %}
         {% endblock %}
     </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $('.sidenav').sidenav();
+      $('.parallax').parallax();
+      $('.collapsible').collapsible();
+    });
+  </script>
   </body>
 </html>
