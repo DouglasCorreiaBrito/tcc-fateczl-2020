@@ -7,13 +7,12 @@ body {
 }
 
 @media screen and (max-width: 480px){
-lottie-player{
-    margin-left: 5%;
-}
-h2{
-font-size: 3rem;
-}
-
+    lottie-player{
+        margin-left: 5%;
+    }
+    h2{
+    font-size: 3rem;
+    }
 }
 
 

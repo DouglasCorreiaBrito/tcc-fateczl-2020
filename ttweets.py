@@ -1,7 +1,6 @@
 import requests
 import tauth
 from Result import Result
-from termcolor import colored
 from sentiment import Sentiment
 
 
@@ -21,7 +20,8 @@ def get_tweets(query):
 
     body = response.json()
     if not body['statuses']:
-        print(colored('\nNão encontrei nenhum tweet', 'redF'))
+        #print(colored('\nNão encontrei nenhum tweet', 'redF'))
+        print()
     else:
         for tweet in body['statuses']:
             text = tweet['full_text']
