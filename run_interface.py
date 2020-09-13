@@ -22,6 +22,11 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/devs')
+def devs():
+    return render_template('devs.html')
+
+
 @app.route('/results', methods=['POST'])
 def result():
     term_search = request.form['search']
