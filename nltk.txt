@@ -1,4 +1,5 @@
-tokenize
-corpus
-RSLPStemmer
-FreqDist
+floresta
+mac_morpho
+rslp
+punkt
+stopwords
