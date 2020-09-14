@@ -22,6 +22,11 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/devs')
+def devs():
+    return render_template('devs.html')
+
+
 @app.route('/results', methods=['POST'])
 def result():
     term_search = request.form['search']
@@ -40,4 +45,5 @@ def result():
                            url2='./static/images/pos_plot.png')
 
 
-app.run(debug=True)
+#port = int(os.environ.get('PORT', 33507))
+#app.run(debug=True, port=port)

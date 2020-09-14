@@ -1,16 +1,18 @@
-.container {
-    min-height: 50vh;
-    width: 90%;
-    background: whitesmoke;
-    padding: 20;
-    margin-left: 5%;
-    margin-top: 3em;
-    border-radius: 4px;
-    box-shadow: 4px 5px 1px 0 rgba(150, 146, 144, 0.15);
- }
+lottie-player{
+    margin-left: 35%;
+}
 
 body {
     background: #f8f4f2
+}
+
+@media screen and (max-width: 480px){
+    lottie-player{
+        margin-left: 5%;
+    }
+    h2{
+    font-size: 3rem;
+    }
 }
 
 

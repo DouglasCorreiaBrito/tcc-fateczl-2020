@@ -2,13 +2,12 @@ flask
 requests
 nltk
 wordcloud
-PIL
 matplotlib
 pandas
 numpy
 seaborn
-glob
 unidecode
-re
+regex
 sklearn
 Pillow
+gunicorn

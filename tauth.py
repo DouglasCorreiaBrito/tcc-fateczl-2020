@@ -1,8 +1,12 @@
 import requests
-import keys
+import os
+#import keys
 
-CONSUMER_KEY = keys.CONSUMER_KEY
-CONSUMER_SECRET = keys.CONSUMER_SECRET
+#CONSUMER_KEY = keys.CONSUMER_KEY
+#CONSUMER_SECRET = keys.CONSUMER_SECRET
+
+CONSUMER_KEY = os.environ['CONSUMER_KEY']
+CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
 
 
 def get_bearer_token():
