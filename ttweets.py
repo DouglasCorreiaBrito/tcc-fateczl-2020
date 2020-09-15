@@ -20,8 +20,7 @@ def get_tweets(query):
 
     body = response.json()
     if not body['statuses']:
-        #print(colored('\nNão encontrei nenhum tweet', 'redF'))
-        print()
+        raise Exception("We don't have tweets to show");
     else:
         for tweet in body['statuses']:
             text = tweet['full_text']
