@@ -1,5 +1,14 @@
 {% extends "template.html" %}
 {% block content %}
+        <div class="page-header">
+            <div class="page-title">
+                <h2>{{title}}</h2>
+             <lottie-player class="lottie-index" src="https://assets1.lottiefiles.com/packages/lf20_8FBVLz.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  autoplay></lottie-player>
+            </div>
+            <blockquote>
+                {{description}}
+            </blockquote>
+        </div>
  <nav class="teal lighten-1">
     <div class="nav-wrapper">
       <form action="/results" method="post" onsubmit="preloader()">

@@ -1,4 +1,7 @@
-lottie-player{
+.page-title{
+    display: flex
+}
+.lottie{
     margin-left: 35%;
 }
 
@@ -15,11 +18,14 @@ body {
 }
 
 @media screen and (max-width: 480px){
-    lottie-player{
+    .page-title{
+        display: flex
+    }
+    .lottie{
         margin-left: 5%;
     }
     h2{
-    font-size: 3rem;
+    font-size: 2.5rem;
     }
     #img-negative{
         width: 350px;
