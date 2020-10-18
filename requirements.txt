@@ -11,3 +11,4 @@ regex
 sklearn
 Pillow
 gunicorn
+mysql-connector-python
