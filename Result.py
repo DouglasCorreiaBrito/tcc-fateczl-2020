@@ -36,3 +36,6 @@ class Result:
     def createdat(self):
         #return format(self._createdat, "%d/%m/%Y")
         return self._createdat
+
+    def split_values(self):
+        return [self.id, self.user, self.text, self.sentiment, self.favorites, self.retweets, self.createdat]
