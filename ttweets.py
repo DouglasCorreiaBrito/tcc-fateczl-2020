@@ -1,5 +1,6 @@
 import requests
 import tauth
+import db_utils
 from Result import Result
 from sentiment import Sentiment
 
@@ -38,5 +39,7 @@ def get_tweets(query):
                 tweet['created_at'],
             )
             list_of_results.append(result)
+
+    db_utils.batch_tweet_insertion(list_of_results)
 
     return list_of_results
