@@ -2,31 +2,20 @@ import mysql.connector
 import Result
 import os
 
+database_host = os.environ['MYSQL_TCC_HOST']
+database_name = os.environ['MYSQL_TCC_NAME']
+database_user = os.environ['MYSQL_TCC_USER']
+database_pass = os.environ['MYSQL_TCC_PASS']
+
 def get_connection():
     mydb = mysql.connector.connect(
-        host="localhost",
-        user=os.environ['MYSQL_ROOT_USER'],
-        password=os.environ['MYSQL_ROOT_PASS'],
-        database="db_sentimentalizer"
+        host=database_host,
+        user=database_user,
+        password=database_pass,
+        database=database_name
     )
 
     return mydb
-
-def tweet_insertion(tweet):
-
-    mydb = get_connection()
-
-    mycursor = mydb.cursor()
-
-    sql = "INSERT INTO tweets (id, username, text, sentiment, fav_count, retweet_count, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-    #val = (tweet.)
-    mycursor.execute(sql, val)
-
-    mydb.commit()
-
-    print(mycursor.rowcount, "record inserted.")
-
-    return
 
 def batch_tweet_insertion(list_of_tweets):
 
@@ -51,14 +40,14 @@ def batch_tweet_insertion(list_of_tweets):
 
 def create_database():
     mydb = mysql.connector.connect(
-        host="localhost",
-        user=os.environ['MYSQL_ROOT_USER'],
-        password=os.environ['MYSQL_ROOT_PASS']
+        host=database_host,
+        user=database_user,
+        password=database_pass
     )
 
     mycursor = mydb.cursor()
 
-    sql = "CREATE DATABASE IF NOT EXISTS db_sentimentalizer"
+    sql = "CREATE DATABASE IF NOT EXISTS " + database_name
     mycursor.execute(sql)
     mydb.commit()
     mydb.close()
