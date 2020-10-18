@@ -21,7 +21,7 @@ def get_tweets(query):
 
     body = response.json()
     if not body['statuses']:
-        raise Exception("We don't have tweets to show");
+        raise Exception("We don't have tweets to show")
     else:
         for tweet in body['statuses']:
             text = tweet['full_text']
