@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-      <link rel="script" href="{{ url_for('static', filename='app.js') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PLN</title>
-  </head>
-  <body>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="script" href="{{ url_for('static', filename='app.js') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sentimentalizer</title>
+  <link rel="shortcut icon" type="image/jpg" href="./static/profiles/brain.svg">
+</head>
+
+<body>
   <nav class="teal lighten-1 ">
     <div class="nav-wrapper">
       <a href="/" class="brand-logo hide-on-med-and-down">
-          <i class="material-icons" style="margin-left: 2em">home</i>
+        <i class="material-icons" style="margin-left: 2em">home</i>
+      </a>
+      <a href="#" class="sidenav-trigger" data-target="mobile-links">
+        <i class="material-icons">menu</i>
       </a>
          <a href="#" class="sidenav-trigger" data-target="mobile-links">
           <i class="material-icons">menu</i>
@@ -26,29 +32,24 @@
   </nav>
 
   <ul class="sidenav" id="mobile-links">
-      <li><a href="/">Home</a></li>
-        <li><a href="/about">Sobre este projeto</a></li>
-        <li><a href="/devs">Sobre os desenvolvedores</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">Sobre este projeto</a></li>
+    <li><a href="/devs">Sobre os desenvolvedores</a></li>
   </ul>
 
-    <div class="container">
-        <div class="page-header">
-            <h2>{{title}}</h2>
-            <blockquote>
-                {{description}}
-            </blockquote>
-        </div>
-        {% block content %}
-        {% endblock %}
-    </div>
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <script>
-    $(document).ready(function(){
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script>
+    $(document).ready(function () {
       $('.sidenav').sidenav();
       $('.parallax').parallax();
       $('.collapsible').collapsible();
     });
   </script>
-  </body>
+</body>
 </html>

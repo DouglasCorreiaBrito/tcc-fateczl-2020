@@ -19,6 +19,7 @@ def get_connection():
 
 def batch_tweet_insertion(list_of_tweets):
     mydb = get_connection()
+
     mycursor = mydb.cursor()
 
     sql = "INSERT INTO tweets (id, username, text, sentiment, fav_count, retweet_count, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s)"
@@ -67,6 +68,7 @@ def create_database():
     return
 
 def create_table_tweets():
+
     mydb = get_connection()
     mycursor = mydb.cursor()
     
@@ -103,3 +105,4 @@ def initialize_database():
     create_database()
     create_table_tweets()
     create_table_search_terms()
+

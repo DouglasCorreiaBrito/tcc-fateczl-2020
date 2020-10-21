@@ -2,6 +2,7 @@ import requests
 import tauth
 import db_utils
 import text_treatment
+
 from Result import Result
 from sentiment import Sentiment
 
