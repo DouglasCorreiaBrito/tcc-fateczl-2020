@@ -1,6 +1,33 @@
+lottie-player{
+    margin-left: 35%;
+}
+
+#img-negative{
+    width: 850px;
+}
+
+#img-positive{
+    width: 850px;
+}
 
 body {
     background: #f8f4f2
+}
+
+@media screen and (max-width: 480px){
+    lottie-player{
+        margin-left: 5%;
+    }
+    h2{
+    font-size: 3rem;
+    }
+    #img-negative{
+        width: 350px;
+    }
+
+    #img-positive{
+        width: 350px;
+    }
 }
 
 

@@ -26,14 +26,14 @@ class Sentiment:
         for pontuacao in prediction:
             list_punct.append(pontuacao)
             pontuacaoFinal += pontuacao
-        print('score por palavra', list_punct)
-        print('score final da frase',pontuacaoFinal)
+        #print('score por palavra', list_punct)
+        #print('score final da frase',pontuacaoFinal)
         if pontuacaoFinal < -0.5:
-            print(pontuacaoFinal)
+            #print(pontuacaoFinal)
             return 'neg'
         elif pontuacaoFinal > 0.5:
-            print(pontuacaoFinal)
+            #print(pontuacaoFinal)
             return 'pos'
         else:
-            print(pontuacaoFinal)
+            #print(pontuacaoFinal)
             return 'neu'

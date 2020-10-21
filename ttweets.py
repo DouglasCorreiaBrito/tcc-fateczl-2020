@@ -1,8 +1,9 @@
 import requests
 import tauth
+import db_utils
+import text_treatment
 from Result import Result
 from sentiment import Sentiment
-
 
 def get_tweets(query):
     list_of_results = []
@@ -20,8 +21,7 @@ def get_tweets(query):
 
     body = response.json()
     if not body['statuses']:
-        #print(colored('\nNão encontrei nenhum tweet', 'redF'))
-        print()
+        raise Exception("We don't have tweets to show")
     else:
         for tweet in body['statuses']:
             text = tweet['full_text']
@@ -38,6 +38,28 @@ def get_tweets(query):
                 tweet['retweet_count'],
                 tweet['created_at'],
             )
+
             list_of_results.append(result)
 
+    persist_search(query=query, results=list_of_results)
+    
     return list_of_results
+
+def persist_search(query, results):
+    query = text_treatment.treat_search_terms(query)
+    query_array = query.split(' ')
+    term_list = "','".join(query.split(' '))
+
+    print(term_list)
+
+    values = []
+    for value in query_array:
+        values.append((value, 0))
+
+    db_utils.execute_many(sql='INSERT IGNORE INTO search_terms (term, search_qty) VALUES (%s, %s)', values=values)
+
+    db_utils.execute(sql="UPDATE search_terms SET search_qty = (search_qty + 1) WHERE term IN ('"+ term_list +"')")
+
+    db_utils.batch_tweet_insertion(results)
+
+    return
