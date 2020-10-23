@@ -10,7 +10,6 @@ import get_charts
 
 app = Flask(import_name=__name__)
 
-
 @app.route('/')
 def home():
     description = 'Insira um termo de pesquisa para descobrir o sentimento das pessoas em relação a ele no Twitter.'

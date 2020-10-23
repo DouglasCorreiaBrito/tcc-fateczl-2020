@@ -6,7 +6,6 @@ import text_treatment
 from Result import Result
 from sentiment import Sentiment
 
-
 def get_tweets(query):
     list_of_results = []
     negative_words = []
@@ -42,7 +41,6 @@ def get_tweets(query):
                 tweet['retweet_count'],
                 tweet['created_at'],
             )
-            list_of_results.append(result)
 
             text_wordcloud = text_treatment.treat_for_wordcloud(text)
             token_space = tokenize.WhitespaceTokenizer()
