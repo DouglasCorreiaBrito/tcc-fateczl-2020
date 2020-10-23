@@ -1,12 +1,16 @@
+from nltk import tokenize
 import requests
 import tauth
 import db_utils
+import text_treatment
 from Result import Result
 from sentiment import Sentiment
 
 
 def get_tweets(query):
     list_of_results = []
+    negative_words = []
+    positive_words = []
     token = tauth.get_bearer_token()
 
     response = requests.get(
@@ -26,7 +30,6 @@ def get_tweets(query):
         for tweet in body['statuses']:
             text = tweet['full_text']
             language = tweet['metadata']['iso_language_code']
-
             sentiment = Sentiment(text, language)
 
             result = Result(
@@ -40,6 +43,14 @@ def get_tweets(query):
             )
             list_of_results.append(result)
 
+            text_wordcloud = text_treatment.treat_for_wordcloud(text)
+            token_space = tokenize.WhitespaceTokenizer()
+            word_list = token_space.tokenize(text_wordcloud)
+            for word in word_list:
+                sentiment = Sentiment(word, language)
+                analyzed_word = sentiment.analyze_feeling()
+                positive_words.append(word) if analyzed_word == 'pos' else negative_words.append(word)
+
     db_utils.batch_tweet_insertion(list_of_results)
 
-    return list_of_results
+    return list_of_results, ' '.join(positive_words), ' '.join(negative_words)

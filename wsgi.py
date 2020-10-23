@@ -1,6 +1,6 @@
 from run_interface import app
-import db_utils
+import db_utils as db
 
 if __name__ == "__main__":
-  db_utils.initialize_database()
-  app.run()
+    db.initialize_database()
+    app.run()

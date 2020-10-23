@@ -87,6 +87,7 @@ ipython_config.py
 
 #Pycharm
 .idea/
+.vscode
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.

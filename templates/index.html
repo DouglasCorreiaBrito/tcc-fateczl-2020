@@ -20,12 +20,72 @@
       </form>
     </div>
   </nav>
-<section id="preloader" style="margin-top: 4em; visibility: hidden;">
-    <h6 style="text-align: center" id="text-loader">Conectando ao Twitter </h6>
+<section id="preloader" style="visibility: hidden;">
+    <h6 style="text-align: center" id="text-loader">Coletando Tweets </h6>
     <div class="progress">
       <div class="indeterminate"></div>
     </div>
 </section>
+<section style="margin-top:6rem">
+       <blockquote><h5>Tráfego</h5></blockquote>
+     <div class="row">
+    <div class="col s4 m3">
+      <div class="card-panel hoverable grey lighten-2">
+          <h2 class="center-align">{{readed_tweets}}</h2>
+        <p class="center-align">Tweets lidos</p>
+      </div>
+    </div>
+         <div class="col s4 m3">
+      <div class="card-panel hoverable grey lighten-2">
+          <h2 class="center-align">{{good_tweets}}</h2>
+        <p class="center-align">Tweets positivos</p>
+      </div>
+    </div>
+         <div class="col s4 m3">
+      <div class="card-panel hoverable grey lighten-2">
+          <h2 class="center-align">{{bad_tweets}}</h2>
+        <p class="center-align">Tweets negativos</p>
+      </div>
+    </div>
+         <div class="col s4 m3">
+      <div class="card-panel hoverable grey lighten-2">
+          <h2 class="center-align">{{neu_tweets}}</h2>
+        <p class="center-align">Tweets neutros</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="piechart"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Positivos', {{good_tweets}}],
+  ['Negativos', {{bad_tweets}}],
+  ['Neutros', {{neu_tweets}}],
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {
+        pieHole: 0.4,
+        width:800,
+        height:600,
+        backgroundColor: '#f8f4f2'
+   };
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+</script>
 <script>
 function preloader() {
   document.getElementById("preloader").style.visibility = "visible";
