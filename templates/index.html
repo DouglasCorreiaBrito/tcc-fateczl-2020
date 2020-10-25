@@ -1,85 +1,146 @@
 {% extends "template.html" %}
 {% block content %}
-        <div class="page-header">
-            <div class="page-title">
-                <h2>{{title}}</h2>
-             <lottie-player class="lottie-index" src="https://assets1.lottiefiles.com/packages/lf20_8FBVLz.json"  background="transparent"  speed="1"  style="width: 100px; height: 100px;"  loop  autoplay></lottie-player>
-            </div>
-            <blockquote>
-                {{description}}
-            </blockquote>
-        </div>
- <nav class="teal lighten-1">
-    <div class="nav-wrapper">
-      <form action="/results" method="post" onsubmit="preloader()">
-        <div class="input-field">
-          <input id="search" name="search" type="search" placeholder="digite..." required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form>
-    </div>
-  </nav>
+<div class="page-header">
+  <div class="page-title">
+    <h2>{{title}}</h2>
+    <lottie-player class="lottie-index" src="https://assets1.lottiefiles.com/packages/lf20_8FBVLz.json"
+      background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+  </div>
+  <blockquote>
+    {{description}}
+  </blockquote>
+</div>
+<nav class="teal lighten-1">
+  <div class="nav-wrapper">
+    <form action="/results" method="post" onsubmit="preloader()">
+      <div class="input-field">
+        <input id="search" name="search" type="search" placeholder="digite..." required>
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+  </div>
+</nav>
 <section id="preloader" style="visibility: hidden;">
-    <h6 style="text-align: center" id="text-loader">Coletando Tweets </h6>
-    <div class="progress">
-      <div class="indeterminate"></div>
-    </div>
+  <h6 style="text-align: center" id="text-loader">Coletando Tweets </h6>
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
 </section>
-<section style="margin-top:6rem">
-       <blockquote><h5>Tráfego</h5></blockquote>
-     <div class="row">
-    <div class="col s4 m3">
+<section class="dashboard">
+  <blockquote>
+    <h5>Tráfego</h5>
+  </blockquote>
+  <div class="row">
+    <div class="col s12 m3">
       <div class="card-panel hoverable grey lighten-2">
-          <h2 class="center-align">{{readed_tweets}}</h2>
+        <h2 class="center-align">{{readed_tweets}}</h2>
         <p class="center-align">Tweets lidos</p>
       </div>
     </div>
-         <div class="col s4 m3">
+    <div class="col s4 m3">
       <div class="card-panel hoverable grey lighten-2">
-          <h2 class="center-align">{{good_tweets}}</h2>
+        <h2 class="center-align">{{good_tweets}}</h2>
         <p class="center-align">Tweets positivos</p>
       </div>
     </div>
-         <div class="col s4 m3">
+    <div class="col s4 m3">
       <div class="card-panel hoverable grey lighten-2">
-          <h2 class="center-align">{{bad_tweets}}</h2>
+        <h2 class="center-align">{{bad_tweets}}</h2>
         <p class="center-align">Tweets negativos</p>
       </div>
     </div>
-         <div class="col s4 m3">
+    <div class="col s4 m3">
       <div class="card-panel hoverable grey lighten-2">
-          <h2 class="center-align">{{neu_tweets}}</h2>
+        <h2 class="center-align">{{neu_tweets}}</h2>
         <p class="center-align">Tweets neutros</p>
       </div>
     </div>
   </div>
 </section>
-<div id="piechart"></div>
+<section class="charts">
+  <div id="piechart" class="first-chart"></div>
+  <div id="top_x_div" class="second-chart"></div>
+</section>
+<section class="leaderboard">
+  <blockquote>
+    <h5>Termos mais pesquisados</h5>
+  </blockquote>
+  <p>baseado num total de {{total_searchs}} pesquisas</p>
+  <table class=" highlight responsive-table">
+    <thead>
+      <tr>
+          <th>Termo</th>
+          <th>percentual das buscas</th>
+          <th class="center-align">buscas</th>
+          <th class="center-align">colocação</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>{{top_terms[0][0]}}</td>
+        <td>
+            <div class="progress">
+              <div id="first-bar" class="determinate blue"></div>
+            </div>
+          </td>
+        <td class="center-align">{{top_terms[0][1]}}</td>
+        <td class="center-align">
+          <img src="./static/profiles/gold_medal.svg" width="30" height="30">
+        </td>
+      </tr>
+      <tr>
+        <td>{{top_terms[1][0]}}</td>
+        <td>
+          <div class="progress">
+  
+              <div id="second-bar" class="determinate red"></div>
+          </div>
+                </td>
+        <td class="center-align">{{top_terms[1][1]}}</td>
+        <td class="center-align">
+          <img src="./static/profiles/silver_medal.svg" width="27" height="27">
+        </td>
+      </tr>
+      <tr>
+        <td>{{top_terms[2][0]}}</td>
+        <td>
+          <div class="progress">
+              <div id="third-bar" class="determinate yellow"></div>
+          </div>
+                </td>
+        <td class="center-align">{{top_terms[2][1]}}</td>
+        <td class="center-align">
+          <img src="./static/profiles/bronzer_medal.svg" width="24" height="24">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
 <script type="text/javascript">
-// Load google charts
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+  // Load google charts
+  google.charts.load('current', { 'packages': ['corechart'] });
+  google.charts.setOnLoadCallback(drawChart);
 
-// Draw the chart and set the chart values
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-  ['Task', 'Hours per Day'],
-  ['Positivos', {{good_tweets}}],
-  ['Negativos', {{bad_tweets}}],
-  ['Neutros', {{neu_tweets}}],
+  // Draw the chart and set the chart values
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Positivos', {{ good_tweets }}],
+  ['Negativos', {{ bad_tweets }}],
+    ['Neutros', {{ neu_tweets }}],
 ]);
 
   // Optional; add a title and set the width and height of the chart
   var options = {
-        pieHole: 0.4,
-        width:800,
-        height:600,
-        backgroundColor: '#f8f4f2'
-   };
+    pieHole: 0.4,
+    backgroundColor: '#f8f4f2',
+    title: 'Percentual de sentimentos',
+    is3D: true,
+  };
 
   // Display the chart inside the <div> element with id="piechart"
   var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -87,9 +148,15 @@ function drawChart() {
 }
 </script>
 <script>
-function preloader() {
-  document.getElementById("preloader").style.visibility = "visible";
-}
+    let bar1 =  ({{top_terms[0][1]}} * 100) / {{total_searchs}};
+    let bar2 =  ({{top_terms[1][1]}} * 100) / {{total_searchs}};
+    let bar3 =  ({{top_terms[2][1]}} * 100) / {{total_searchs}};
+    document.getElementById("first-bar").style.width = `${bar1}%`;
+    document.getElementById("second-bar").style.width = `${bar2}%`;
+    document.getElementById("third-bar").style.width = `${bar3}%`;
+  function preloader() {
+    document.getElementById("preloader").style.visibility = "visible";
+  }
 </script>
 
 {% endblock %}

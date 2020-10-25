@@ -6,6 +6,7 @@ import text_treatment
 from Result import Result
 from sentiment import Sentiment
 
+
 def get_tweets(query):
     list_of_results = []
     negative_words = []
@@ -41,7 +42,7 @@ def get_tweets(query):
                 tweet['retweet_count'],
                 tweet['created_at'],
             )
-
+            list_of_results.append(result)
             text_wordcloud = text_treatment.treat_for_wordcloud(text)
             token_space = tokenize.WhitespaceTokenizer()
             word_list = token_space.tokenize(text_wordcloud)
@@ -53,6 +54,7 @@ def get_tweets(query):
 
     persist_search(query=query, results=list_of_results)
     return list_of_results, ' '.join(positive_words), ' '.join(negative_words)
+
 
 def persist_search(query, results):
     query = text_treatment.treat_search_terms(query)
@@ -67,7 +69,7 @@ def persist_search(query, results):
 
     db_utils.execute_many(sql='INSERT IGNORE INTO search_terms (term, search_qty) VALUES (%s, %s)', values=values)
 
-    db_utils.execute(sql="UPDATE search_terms SET search_qty = (search_qty + 1) WHERE term IN ('"+ term_list +"')")
+    db_utils.execute(sql="UPDATE search_terms SET search_qty = (search_qty + 1) WHERE term IN ('" + term_list + "')")
 
     db_utils.batch_tweet_insertion(results)
 

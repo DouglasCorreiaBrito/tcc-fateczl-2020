@@ -47,3 +47,29 @@ def neutral_tweets():
         final_result.append(row[i])
     mydb.close()
     return final_result[0]
+
+def top_tweets():
+    mydb = db.get_connection()
+    sql = "select * from search_terms order by search_qty desc limit 5;"
+    final_result = []
+    cursor = mydb.cursor()
+    cursor.execute(sql)
+    resultset = cursor.fetchall();
+    for entry in resultset:
+        final_result.append(entry)
+    mydb.close()
+    return final_result
+
+def total_searchs():
+    mydb = db.get_connection()
+    sql = "select sum(search_qty) from search_terms;"
+    final_result = 0
+    cursor = mydb.cursor()
+    cursor.execute(sql)
+    resultset = cursor.fetchone()
+    for result in resultset:
+        final_result = result
+    mydb.close()
+    return final_result
+
+total_searchs()

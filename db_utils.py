@@ -2,10 +2,15 @@ import mysql.connector
 import Result
 import os
 
-database_host = os.environ['MYSQL_TCC_HOST']
-database_name = os.environ['MYSQL_TCC_NAME']
-database_user = os.environ['MYSQL_TCC_USER']
-database_pass = os.environ['MYSQL_TCC_PASS']
+#database_host = os.environ['MYSQL_TCC_HOST']
+#database_name = os.environ['MYSQL_TCC_NAME']
+#database_user = os.environ['MYSQL_TCC_USER']
+#database_pass = os.environ['MYSQL_TCC_PASS']
+
+database_host = 'localhost'
+database_name = 'db_sentimentalizer'
+database_user = 'admin'
+database_pass = 'bcg-e2643B'
 
 def get_connection():
     mydb = mysql.connector.connect(

@@ -18,7 +18,9 @@ def home():
                            readed_tweets=get_charts.readed_tweets(),
                            good_tweets=get_charts.good_tweets(),
                            bad_tweets=get_charts.bad_tweets(),
-                           neu_tweets=get_charts.neutral_tweets())
+                           neu_tweets=get_charts.neutral_tweets(),
+                           top_terms=get_charts.top_tweets(),
+                           total_searchs = get_charts.total_searchs())
 
 
 @app.route('/about')
