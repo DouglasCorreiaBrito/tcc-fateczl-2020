@@ -50,7 +50,7 @@ def neutral_tweets():
 
 def top_tweets():
     mydb = db.get_connection()
-    sql = "select * from search_terms order by search_qty desc limit 5;"
+    sql = "select * from search_terms order by search_qty desc limit 3;"
     final_result = []
     cursor = mydb.cursor()
     cursor.execute(sql)
