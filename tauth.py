@@ -1,6 +1,6 @@
 import requests
 import os
-import keys
+#import keys
 
 #CONSUMER_KEY = keys.CONSUMER_KEY
 #CONSUMER_SECRET = keys.CONSUMER_SECRET
