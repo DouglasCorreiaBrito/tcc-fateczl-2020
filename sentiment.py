@@ -1,5 +1,6 @@
 import brain
 
+
 class Sentiment:
     def __init__(self, text, language):
         self._text = text
@@ -20,20 +21,15 @@ class Sentiment:
             self._text = "ruim"
 
         prediction = brain.predict(self._text)
-        pontuacaoFinal = 0
+        pontuacao_final = 0
         list_punct = []
 
         for pontuacao in prediction:
             list_punct.append(pontuacao)
-            pontuacaoFinal += pontuacao
-        print('score por palavra', list_punct)
-        print('score final da frase',pontuacaoFinal)
-        if pontuacaoFinal < -0.5:
-            print(pontuacaoFinal)
+            pontuacao_final += pontuacao
+        if pontuacao_final < -0.5:
             return 'neg'
-        elif pontuacaoFinal > 0.5:
-            print(pontuacaoFinal)
+        elif pontuacao_final > 0.5:
             return 'pos'
         else:
-            print(pontuacaoFinal)
             return 'neu'

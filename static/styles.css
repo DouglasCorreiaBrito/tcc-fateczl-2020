@@ -16,6 +16,22 @@
 body {
     background: #f8f4f2
 }
+.dashboard{
+    margin-top:6rem
+}
+.charts{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.first-chart{
+    width: 50rem;
+    height: 30.5rem;
+}
+.leaderboard{
+    margin-bottom: 2rem;
+}
 
 @media screen and (max-width: 480px){
     .page-title{
@@ -34,6 +50,12 @@ body {
     #img-positive{
         width: 350px;
     }
+
+    .first-chart{
+        width: 25rem;
+        height: 21.75rem;
+    }
+
 }
 
 

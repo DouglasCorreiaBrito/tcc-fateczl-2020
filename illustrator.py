@@ -13,15 +13,17 @@ import seaborn as sns
 import os
 import text_treatment
 
-#arquivo = open('teste.txt', 'r', encoding="utf8")
-#unica_string = arquivo.read()
-#arquivo.close()
 
-#data = pd.read_csv('Book1.csv')
+# arquivo = open('teste.txt', 'r', encoding="utf8")
+# unica_string = arquivo.read()
+# arquivo.close()
+
+# data = pd.read_csv('Book1.csv')
 
 def bad_color_func(word, font_size, position, orientation, random_state=None,
-                    **kwargs):
+                   **kwargs):
     return "hsl(0, 75%%, %d%%)" % random.randint(60, 100)
+
 
 def draw_wordcloud(words_in_the_same_str, name_mask='', positive_flag=True):
     words = text_treatment.treat_for_wordcloud(words_in_the_same_str)
@@ -34,7 +36,7 @@ def draw_wordcloud(words_in_the_same_str, name_mask='', positive_flag=True):
                                background_color='black', contour_width=1,
                                contour_color='steelblue').generate(words)
         plt.figure(figsize=(10, 7))
-        plt.imshow(word_cloud,interpolation='bilinear')
+        plt.imshow(word_cloud, interpolation='bilinear')
         plt.plot(range(10), range(10), '-o')
         plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
         plt.axis('off')
@@ -95,4 +97,4 @@ def gerar_histograma(dataframe, df_text_column, num_column):
     plt.show()
 
 # draw_wordcloud(unica_string)
-#gerar_histograma(data, 'text_pt', 10)
+# gerar_histograma(data, 'text_pt', 10)

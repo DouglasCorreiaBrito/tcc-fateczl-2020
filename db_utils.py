@@ -18,7 +18,6 @@ def get_connection():
     return mydb
 
 def batch_tweet_insertion(list_of_tweets):
-
     mydb = get_connection()
 
     mycursor = mydb.cursor()
@@ -29,13 +28,28 @@ def batch_tweet_insertion(list_of_tweets):
     for tweet in list_of_tweets:
         val.append(tweet.split_values())
 
-
     mycursor.executemany(sql, val)
-
     mydb.commit()
+    mydb.close()
 
     print(mycursor.rowcount, "was inserted.")
 
+    return
+
+def execute(sql, values=None):
+    mydb = get_connection()
+    mycursor = mydb.cursor()
+    mycursor.execute(sql, values)
+    mydb.commit()
+    mydb.close()
+    return
+
+def execute_many(sql, values=None):
+    mydb = get_connection()
+    mycursor = mydb.cursor()
+    mycursor.executemany(sql, values)
+    mydb.commit()
+    mydb.close()
     return
 
 def create_database():
@@ -51,9 +65,9 @@ def create_database():
     mycursor.execute(sql)
     mydb.commit()
     mydb.close()
+    return
 
-def initialize_database():
-    create_database()
+def create_table_tweets():
 
     mydb = get_connection()
     mycursor = mydb.cursor()
@@ -71,3 +85,24 @@ def initialize_database():
     mycursor.execute(sql)
     mydb.commit()
     mydb.close()
+    return
+
+def create_table_search_terms():
+    mydb = get_connection()
+    mycursor = mydb.cursor()
+    
+    sql = """CREATE TABLE IF NOT EXISTS search_terms(
+        term            varchar(100) primary key,
+        search_qty      int
+    )"""
+
+    mycursor.execute(sql)
+    mydb.commit()
+    mydb.close()
+    return
+
+def initialize_database():
+    create_database()
+    create_table_tweets()
+    create_table_search_terms()
+

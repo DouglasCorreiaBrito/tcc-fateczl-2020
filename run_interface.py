@@ -5,16 +5,22 @@ import time
 from flask import Flask, render_template, request
 
 import illustrator
-import illustrator_handler
 import ttweets
+import get_charts
 
 app = Flask(import_name=__name__)
-
 
 @app.route('/')
 def home():
     description = 'Insira um termo de pesquisa para descobrir o sentimento das pessoas em relação a ele no Twitter.'
-    return render_template('index.html', title='Twitter Sentimentalizer', description=description)
+    return render_template('index.html', title='Twitter Sentimentalizer',
+                           description=description,
+                           readed_tweets=get_charts.readed_tweets(),
+                           good_tweets=get_charts.good_tweets(),
+                           bad_tweets=get_charts.bad_tweets(),
+                           neu_tweets=get_charts.neutral_tweets(),
+                           top_terms=get_charts.top_tweets(),
+                           total_searchs = get_charts.total_searchs())
 
 
 @app.route('/about')
@@ -31,8 +37,7 @@ def devs():
 def result():
     term_search = request.form['search']
     try:
-        tweets = ttweets.get_tweets(term_search)
-        neg, pos = illustrator_handler.get_tweets(term_search)
+        tweets, pos, neg = ttweets.get_tweets(term_search)
         files = glob.glob('./static/images/*')
         for f in files:
             os.remove(f)

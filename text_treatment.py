@@ -59,6 +59,10 @@ def treat_all(text):
     return treat_stemming(
         treat_stopwords(treat_punctuation(treat_accentuation(treat_user_mention(treat_urls(pre_processing(text)))))))
 
+def treat_search_terms(text):
+    if not text:
+        return text
+    return treat_stopwords(treat_punctuation(treat_accentuation(pre_processing(text))))
 
 def treat_for_wordcloud(text):
     if not text:
