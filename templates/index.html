@@ -81,7 +81,7 @@
       <tr>
         <td>{{top_terms[0][0]}}</td>
         <td>
-            <div class="progress">
+            <div class="progress tooltipped" data-position="bottom" data-tooltip="≅ {{(top_terms[0][1] * 100)// total_searchs}}%" >
               <div id="first-bar" class="determinate blue"></div>
             </div>
           </td>
@@ -93,8 +93,7 @@
       <tr>
         <td>{{top_terms[1][0]}}</td>
         <td>
-          <div class="progress">
-  
+          <div class="progress tooltipped" data-position="bottom" data-tooltip="≅ {{(top_terms[1][1] * 100)// total_searchs}}%">
               <div id="second-bar" class="determinate red"></div>
           </div>
                 </td>
@@ -106,8 +105,8 @@
       <tr>
         <td>{{top_terms[2][0]}}</td>
         <td>
-          <div class="progress">
-              <div id="third-bar" class="determinate yellow"></div>
+          <div class="progress tooltipped" data-position="top" data-tooltip="≅ {{(top_terms[2][1] * 100)// total_searchs}}%">
+              <div id="third-bar" class="determinate yellow "></div>
           </div>
                 </td>
         <td class="center-align">{{top_terms[2][1]}}</td>
