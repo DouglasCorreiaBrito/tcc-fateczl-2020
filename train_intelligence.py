@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.dummy import DummyRegressor
 import pandas as pd
 import pickle
 import text_treatment
@@ -41,9 +42,15 @@ def train_intelligence(dataframe, text_column, classification_column):
     filename = 'anton_vectorizer.sav'
     pickle.dump(vectorizer, open(filename, 'wb'))
 
-    return round(logistic_regression.score(test, class_test) * 100, 2)
+    ###### baseline ######
+    baseline = DummyRegressor(strategy="mean")
+    baseline.fit(train, class_train)
+    print('Baseline Accuracy: ')
+    print(round(baseline.predict(class_test)[0] * 100, 2))
+    ###### baseline ######
 
+    print('Algorithm Accuracy:')
+    print(round(logistic_regression.score(test, class_test) * 100, 2))
+    return
 
-print(train_intelligence(mass_data_reviews, 'treated_text', 'classification'))
-
-
+train_intelligence(mass_data_reviews, 'treated_text', 'classification')
