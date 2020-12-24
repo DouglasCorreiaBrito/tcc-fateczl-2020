@@ -24,7 +24,7 @@ def train_intelligence(dataframe, text_column, classification_column):
     bag_of_words = vectorizer.fit_transform(dataframe[text_column])
 
     train, test, class_train, class_test = train_test_split(bag_of_words, dataframe[classification_column],
-                                                            random_state=42, test_size=0.15)
+                                                            random_state=42, test_size=0.25)
 
     logistic_regression = LogisticRegression()
     logistic_regression.fit(train, class_train)
