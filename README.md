@@ -5,3 +5,5 @@
 ## Aprendizado de Máquina para Análise Sentimental em Redes Sociais
 Este projeto é um trabalho de conclusão de curso realizado na Faculdade de Tecnologia da Zona Leste, sob orientação do Prof. M.Sc. Leandro Colevati dos Santos, como pré- requisito para a obtenção da Graduação no curso de Análise e
 Desenvolvimento de Sistemas.
+
+Publicado em : http://tcc-fateczl-2020.herokuapp.com
